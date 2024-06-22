@@ -31,9 +31,13 @@ export default class QueryParser {
   }
 
   #expand() {
+    if(this.#source.length == 0) {
+      return [];
+    }
+
     const result = [];
 
-    for(const [ key, value ] of this.#records) {
+    for(const [ key, value = '' ] of this.#records) {
       let scope = result;
 
       if(/^[A-Za-z_$][A-Za-z_$\d]*(\[(([A-Za-z_$][A-Za-z_$\d]*)|\d+)?\])*$/g.test(key)) {
